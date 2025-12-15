@@ -34,7 +34,7 @@ jobs:
       pkgVer: ${{ steps.version.outputs.pkgVer }}
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set Build Version
         id: version
@@ -54,7 +54,7 @@ jobs:
       image: ${{ inputs.DOCKER_IMAGE }}
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Build Deployment Package
         run: |
@@ -62,7 +62,7 @@ jobs:
           ls -last $GITHUB_WORKSPACE/build-scripts/${{ env.UBUNTU_VERSION }}/
           $GITHUB_WORKSPACE/build-scripts/${{ env.UBUNTU_VERSION }}/build-${{ inputs.moduleName }}.sh $GITHUB_WORKSPACE "${{ needs.set-version.outputs.upstreamVer }}" "/tmp/${{ inputs.moduleName }}-build" "${{ needs.set-version.outputs.pkgVer }}"
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: ${{ inputs.moduleName }}-deb
           path: /tmp/${{ inputs.moduleName }}-build
@@ -74,10 +74,10 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.10'
 
@@ -111,7 +111,7 @@ jobs:
         run: |
           python3 setup.py sdist --dist-dir /tmp/dist bdist_wheel --dist-dir /tmp/dist
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: ${{ inputs.moduleName }}-python
           path: /tmp/dist
@@ -126,11 +126,11 @@ jobs:
       image: ${{ inputs.DOCKER_IMAGE }}
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Try load from cache.
         id: third-party-dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: /tmp/third-party-dependencies
           key: ${{ format('third-party-dependencies-{0}', hashFiles(format('./build-scripts/{0}/build-3rd-parties.sh', inputs.UBUNTU_VERSION ))) }}
@@ -142,7 +142,7 @@ jobs:
           $GITHUB_WORKSPACE/build-scripts/${{ inputs.UBUNTU_VERSION }}/build-3rd-parties.sh ./cache/3rd-party-dependencies
           mv $GITHUB_WORKSPACE/build-scripts/${{ inputs.UBUNTU_VERSION }}/cache/* /tmp/third-party-dependencies
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: third-party-dependencies
           path: /tmp/third-party-dependencies
