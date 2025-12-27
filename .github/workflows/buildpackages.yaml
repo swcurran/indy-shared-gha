@@ -22,7 +22,7 @@ on:
 
 jobs:
 
-  # hyperledger/indy-shared-gha/.github/actions/set-version uses timestamps for development package versioning.
+  # hyperledger-indy/indy-shared-gha/.github/actions/set-version uses timestamps for development package versioning.
   # Make sure the version is only calculated once for consistency.
   set-version:
     name: Set Version
@@ -38,7 +38,7 @@ jobs:
 
       - name: Set Build Version
         id: version
-        uses:  hyperledger/indy-shared-gha/.github/actions/set-version@v2
+        uses:  hyperledger-indy/indy-shared-gha/.github/actions/set-version@v2
         with:
           moduleName: ${{ inputs.moduleName }}
           isDev: ${{ inputs.isDev }}
@@ -97,7 +97,7 @@ jobs:
 
       - name: Set Build Version
         id: version
-        uses: hyperledger/indy-shared-gha/.github/actions/set-version@v2
+        uses: hyperledger-indy/indy-shared-gha/.github/actions/set-version@v2
         with:
           moduleName: ${{ inputs.moduleName }}
           isDev: ${{ inputs.isDev }}

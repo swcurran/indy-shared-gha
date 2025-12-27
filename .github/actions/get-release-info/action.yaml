@@ -1,5 +1,5 @@
 name: "Get Release Info"
-description: "Gets the release version and meta data from a string containing a verison number in the form <Major>.<Minor>.<Patch>[[-]rc<Num>]."
+description: "Gets the release version and meta data from a string containing a version number in the form <Major>.<Minor>.<Patch>[[-]rc<Num>]."
 
 inputs:
   versionString:
